@@ -1,0 +1,28 @@
+﻿@model DOSApplication.ViewModels.DistanceResultViewModel
+@{
+    ViewBag.Title = "Distance result";
+}
+
+<div class="main-content">
+    <h1>Distance Results</h1>
+    <div class="inner-content">
+        @foreach (var result in Model.DistanceResponse.OriginDestination)
+        {
+            if (result.Status == "OK")
+            {
+                <div class="distance-wrapper">
+                    <div class="distance-header"><span class="distance-result">@result.Origin</span><span class="to">to</span><span class="distance-result">@result.Destination</span></div>
+                    <div class="distance-element"><span class="distance-value-label">Distance:</span><span class="distance-value-result">@result.Distance.Text</span></div>
+                    <div class="distance-element"><span class="distance-value-label">Duration:</span><span class="distance-value-result">@result.Duration.Text</span></div>
+                </div>
+
+            }
+            else
+            {
+                <div class="alert-danger">No result could be found. Please try again.</div>
+            }
+        }
+        <div class="line"></div>
+        @Html.ActionLink("<< Back to Calculator", "Index", "Home", null, new { @class = "return-home" })
+    </div>
+</div>

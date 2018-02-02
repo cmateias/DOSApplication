@@ -1,0 +1,40 @@
+﻿@model DOSApplication.ViewModels.DistanceCalculatorViewModel
+@{
+    ViewBag.Title = "Distance calculator";
+}
+<div class="main-content">
+    <h1>@Model.Heading</h1>
+    <div class="inner-content">
+        @using (Html.BeginForm(Model.Action, "DistanceCalculator"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Origin)
+                @Html.TextBoxFor(m => m.Origin, new { @class = "form-control", autofocus = "autofocus", placeholder = "Enter an origin location" })
+                @Html.ValidationMessageFor(m => m.Origin)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Destination)
+                @Html.TextBoxFor(m => m.Destination, new { @class = "form-control", placeholder = "Enter a destination location" })
+                @Html.ValidationMessageFor(m => m.Destination)
+            </div>
+            <div class="form-group">
+                <div class="radio-wrap">
+                    @Html.RadioButtonFor(m => m.Mode, "Driving", new { @class = "form-check-input", @checked = "checked" }) Driving
+                </div>
+                <div class="radio-wrap">
+                    @Html.RadioButtonFor(m => m.Mode, "Walking", new { @class = "form-check-input" }) Walking
+                </div>
+                <div class="radio-wrap">
+                    @Html.RadioButtonFor(m => m.Mode, "Bicycling", new { @class = "form-check-input" }) Bicycling
+                </div>
+            </div>
+            <div class="line"></div>
+            <button type="submit" class="btn btn-primary btn-lg">Calculate</button>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
